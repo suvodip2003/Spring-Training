@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:jms="http://www.springframework.org/schema/jms"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop 
+	    http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	    http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/jee 
+        http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+        http://www.springframework.org/schema/lang 
+        http://www.springframework.org/schema/lang/spring-lang-3.1.xsd
+        http://www.springframework.org/schema/tx 
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/util 
+        http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<!-- <bean -->
+	<!-- class="org.springframework.context.annotation.CommonAnnotationBeanPostProcessor" 
+		/> -->
+
+	<context:component-scan base-package="com.oaktreeair.ffprogram" />
+
+	<bean id="seg01" class="com.oaktreeair.ffprogram.Segment">
+		<property name="segmentNumber" value="1234" />
+		<property name="flightNumber" value="333" />
+		<property name="originatingCity" value="SFO" />
+		<property name="miles" value="1000" />
+		<property name="parser" ref="theParser" />
+	</bean>
+
+	<!-- <bean id="contact01" class="com.oaktreeair.ffprogram.ContactInfo"> -->
+	<!-- <property name="emailAddress" value="sam@sam.com" /> -->
+	<!-- <property name="homePhone" value="555-1212" /> -->
+	<!-- <property name="mobilePhone" value="555-1313" /> -->
+	<!-- <property name="smsNumber" value="555-1414" /> -->
+	<!-- </bean> -->
+
+	<bean id="flier01" class="com.oaktreeair.ffprogram.Flier">
+		<property name="flierName" value="Sam Smith" />
+		<property name="flierID" value="756" />
+		<property name="contactInfo" ref="contact01" />
+		<property name="homeAddress" ref="addrInfo01" />
+	</bean>
+
+	<bean id="calcBonus" class="com.oaktreeair.ffprogram.BonusCalcImpl" />
+
+	<bean id="baseAddress" class="com.oaktreeair.ffprogram.AddressInfo">
+		<constructor-arg value="123 Elm Street" />
+		<constructor-arg value="Marion" />
+		<constructor-arg value="IA" />
+		<constructor-arg value="52302" />
+		<constructor-arg value="USA" />
+	</bean>
+
+	<bean id="addrInfo01" parent="baseAddress">
+		<property name="city" value="Anytown" />
+	</bean>
+
+	<bean id="addrInfo02" parent="baseAddress" />
+
+	<bean class="javax.xml.parsers.DocumentBuilderFactory" id="domFactory"
+		factory-method="newInstance">
+	</bean>
+
+	<bean id="theParser" factory-bean="domFactory" factory-method="newDocumentBuilder" />
+</beans>         

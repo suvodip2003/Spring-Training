@@ -1,0 +1,22 @@
+<flights>
+  <flight flightNumber="333">
+    <segments>
+      <segment startCity="SFO">
+         <miles>445</miles>
+      </segment>
+      <segment startCity="LAX">
+         <miles>567</miles>
+      </segment>
+    </segments>
+  </flight>
+  <flight flightNumber="612">
+    <segments>
+      <segment startCity="STL">
+         <miles>1022</miles>
+      </segment>
+      <segment startCity="BOS">
+         <miles>120</miles>
+      </segment>
+    </segments>
+  </flight>
+</flights>
